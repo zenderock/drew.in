@@ -58,6 +58,11 @@ module.exports = {
       exprContextCritical: false,
     };
 
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "zod/v3": require.resolve("zod"),
+    };
+
     return config;
   },
   images: {

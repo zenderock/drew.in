@@ -32,5 +32,5 @@ model Customer {
   @@index(externalId)
   @@index(linkId)
   @@index(country)
-  @@fulltext([email, name]) // For full-text search
+  @@index([email, name]) // For full-text search
 }

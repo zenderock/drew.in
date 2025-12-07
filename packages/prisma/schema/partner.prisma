@@ -85,7 +85,7 @@ model Partner {
   @@index(discoverableAt)
   @@index(trustedAt)
   @@index(payoutMethodHash)
-  @@fulltext([email, name]) // For full-text search
+  @@index([email, name]) // For full-text search
 }
 
 model PartnerInvite {

@@ -1,12 +1,15 @@
-import { Client } from "@planetscale/database";
-import { PrismaPlanetScale } from "@prisma/adapter-planetscale";
+import { Pool, neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
+import ws from "ws";
 
-const client = new Client({
-  url: process.env.PLANETSCALE_DATABASE_URL || process.env.DATABASE_URL,
-});
+neonConfig.webSocketConstructor = ws;
 
-const adapter = new PrismaPlanetScale(client);
+const connectionString =
+  process.env.PLANETSCALE_DATABASE_URL || process.env.DATABASE_URL;
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
 
 export const prismaEdge = new PrismaClient({
   adapter,
